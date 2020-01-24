@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package maestro.deploy.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+option go_package = "deploy";
+
+enum DeployStatus {
+  option allow_alias = true;
+  UNKNOWN = 0;
+  PENDING_APPROVAL = 1;
+  STARTED = 2;
+  RUNNING = 2;
+  REJECTED = 3;
+  COMPLETE = 4;
+  DONE = 4;
+}
+
+message CreateDeployRequest {
+  int64 build_id = 1;
+  string repo = 2;
+}
+
+message GetDeployRequest {
+  int64 deploy = 1;
+}
+
+message Deploy {
+  int64 deploy_id = 1;
+  DeployStatus status = 2;
+}
+
+message Deploys {
+  repeated Deploy deploy = 1;
+}
+
+service MaestroService {
+  rpc CreateDeploy(CreateDeployRequest) returns (Deploy) {
+    option (google.api.http) = { post: "/v1/deploys" body: "*" };
+  }
+  rpc GetDeploys(google.protobuf.Empty) returns (Deploys) {
+    option (google.api.http) = { get: "/v1/deploys" };
+  }
+  rpc GetDeploy(GetDeployRequest) returns (Deploy) {
+    option (google.api.http) = { get: "/v1/deploys/{deploy}" };
+  }
+}
+
+
