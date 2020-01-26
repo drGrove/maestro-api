@@ -4,6 +4,7 @@ package maestro.deploy.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 option go_package = "deploy";
 
 enum DeployStatus {
@@ -27,8 +28,11 @@ message GetDeployRequest {
 }
 
 message Deploy {
-  int64 deploy_id = 1;
+  int64 id = 1;
   DeployStatus status = 2;
+  google.protobuf.Timestamp completed = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
 }
 
 message Deploys {
