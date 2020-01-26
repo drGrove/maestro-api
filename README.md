@@ -1,3 +1,3 @@
 # Maestro API
 
-The API for maestro, a kubernetes/helm deployment tool.
+API for Maestro, A CD Tool.
