@@ -39,6 +39,10 @@ setup:
 
 .PHONY: run
 run:
+	@pipenv run flask run
+
+.PHONY: run-wsgi
+run-wsgi:
 	@pipenv run python3 wsgi.py
 
 .PHONY: pipenv-lock
