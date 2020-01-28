@@ -37,6 +37,10 @@ shell:
 setup:
 	@pipenv --three install --dev
 
+.PHONY: run
+run:
+	@pipenv run python3 wsgi.py
+
 .PHONY: pipenv-lock
 pipenv-lock:
 	@pipenv update
@@ -87,6 +91,15 @@ endif
 push-image:
 	$(call check_defined, PACKAGE)
 	docker push $(DOCKER_REGISTRY_PATH)/$(PACKAGE):$(VERSION)
+
+.PHONY: postgres
+postgres:
+	@docker run -d \
+		-p 5432:5432 \
+		-e POSTGRES_USER=postgres \
+		-e POSTGRES_PASSWORD=postgres \
+		-e POSTGRES_DB=maestro \
+		postgres
 
 .PHONY: clean
 clean:
