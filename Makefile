@@ -61,11 +61,11 @@ lint:
 
 .PHONY: test
 test: setup
-	-@$(PIP_ENV)/bin/coverage run -m unittest -v
+	@pipenv run pytest --cov=maestro_api
 
 .PHONY: test-by-name
 test-by-name:
-	-@$(PIP_ENV)/bin/coverage run -m unittest $(TEST) -v
+	@pipenv run pytest --cov=maestro_api $(TEST)
 
 .PHONY: coverage
 coverage:
