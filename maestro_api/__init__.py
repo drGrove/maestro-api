@@ -19,7 +19,7 @@ def create_app():
         from .routes import ping
 
         # Create tables for our models
-        db.create_all()
+        # db.create_all()
 
         # Return app
         return app
