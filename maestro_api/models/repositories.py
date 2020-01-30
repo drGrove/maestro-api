@@ -10,7 +10,7 @@ class Repository(db.Model):
     url = db.Column(db.String(1000))
     deployments = db.relationship('Deploy', backref='repositories', lazy=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
-    last_updated = db.Column(db.DateTime, onupdate=datetime.now)
+    last_updated = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     def __repr__(self):
         return f'<Repository {self.name}>'
@@ -20,6 +20,6 @@ class Repository(db.Model):
             "id": self.id,
             "name": self.name,
             "url": self.url,
-            "created_at": datatime.timestamp(self.created_at),
+            "created_at": datetime.timestamp(self.created_at),
             "last_updated": datetime.timestamp(self.last_updated)
         }

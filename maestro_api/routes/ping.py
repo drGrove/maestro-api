@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import make_response
 
 
-@app.route('/')
+@app.route('/ping', methods=['GET'])
 def ping():
     return make_response(jsonify({
         "timestamp": datetime.timestamp(datetime.now())

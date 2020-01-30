@@ -3,22 +3,24 @@ from flask import jsonify
 from flask import make_response
 from flask import request
 
+from .. import db
 from ..models.repositories import Repository
 
 
 @app.route('/repository', methods=['POST'])
 def create_repository():
     body = request.get_json()
-    if body is None or body == {}:
-        return make_response(json.dumps({
-            "msg": "Invalid input data"
+    if body is None:
+        return make_response(jsonify({
+            "error": True,
+            "msg": "Invalid input data, must be json"
         }), 400)
     body_error = False
     body_error_messages = []
-    if body['name'] is None or body['name'] == "":
+    if body.get('name') is None or body.get('name') == "":
         body_error = True
         body_error_messages.append('Missing name')
-    if body['url'] is None or body['url'] == "":
+    if body.get('url') is None or body.get('url') == "":
         body_error = True
         body_error_messages.append('Missing URL')
     if body_error:

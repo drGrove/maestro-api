@@ -5,7 +5,7 @@ class Config:
     """Set Flask configuration vars from .env file."""
 
     # General
-    ENVIRONMENT = environ.get('ENV')
+    ENVIRONMENT = environ.get('ENV') or 'development'
     FLASK_DEBUG = environ.get('FLASK_DEBUG')
 
     # Database

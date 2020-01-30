@@ -60,8 +60,8 @@ lint:
 	@pipenv run flake8 ./**/*.py
 
 .PHONY: test
-test: setup
-	@pipenv run pytest --cov=maestro_api
+test:
+	@pipenv run pytest --cov-report term-missing --cov-report html --cov=maestro_api
 
 .PHONY: test-by-name
 test-by-name:

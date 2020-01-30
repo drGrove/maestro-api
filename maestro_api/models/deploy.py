@@ -3,7 +3,7 @@ import enum
 
 from .. import db
 
-class DeployStatus(enum.Enum):
+class DeployStatus(str, enum.Enum):
     UNKNOWN = 'unknown'
     PENDING = 'pending'
     RUNNING = 'running'
@@ -25,7 +25,7 @@ class Deploy(db.Model):
     status = db.Column(db.Enum(DeployStatus), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     completed = db.Column(db.DateTime, nullable=True)
-    last_updated = db.Column(db.DateTime, onupdate=datetime.now)
+    last_updated = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     def __repr__(self):
         return f'<Deploy {self.id}>'
@@ -34,10 +34,10 @@ class Deploy(db.Model):
         return {
             "id": self.id,
             "build_number": self.build_number,
-            "repo": self.repo,
+            "repo_id": self.repo_id,
             "config": self.config,
             "status": self.status,
-            "completed": datetime.timestamp(self.completed) or None,
+            "completed": datetime.timestamp(self.completed) if self.completed is not None else "",
             "created_at": datetime.timestamp(self.created_at),
             "last_updated": datetime.timestamp(self.last_updated)
         }
