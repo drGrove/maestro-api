@@ -69,7 +69,7 @@ test-by-name:
 
 .PHONY: coverage
 coverage:
-	@$(PIP_ENV)/bin/coverage report -m
+	@$(PIP_ENV)/bin/coveralls
 
 .PHONY: build-image
 build-image:
@@ -103,7 +103,7 @@ postgres:
 		-e POSTGRES_USER=postgres \
 		-e POSTGRES_PASSWORD=postgres \
 		-e POSTGRES_DB=maestro \
-		postgres
+		postgres:11.2
 
 .PHONY: clean
 clean:
