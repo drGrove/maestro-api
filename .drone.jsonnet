@@ -98,9 +98,6 @@ local service_postgres = {
           "apk add make",
           "make build-image"
         ],
-        depends_on = [
-          "clone"
-        ]
       ),
       step(
         name = "tag",
