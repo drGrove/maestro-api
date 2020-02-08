@@ -181,9 +181,9 @@ local mounts = [
           "make setup",
           "make coverage"
         ],
-        environment: {
+        environment = {
           COVERALLS_REPO_TOKEN: {
-            from_secret: COVERALLS_REPO_TOKEN,
+            from_secret: "COVERALLS_REPO_TOKEN",
           },
         },
       ),
