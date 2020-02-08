@@ -68,28 +68,28 @@ local service_postgres = {
   },
 };
 
-local volumes = [
-  {
-    name: "docker-socket",
-    host: {
-      path: "/var/run/docker.sock"
-    },
-  },
-];
+// local volumes = [
+//   {
+//     name: "docker-socket",
+//     host: {
+//       path: "/var/run/docker.sock"
+//     },
+//   },
+// ];
 
-local mounts = [
-  {
-    name: "docker-socket",
-    path: "/var/run/docker.sock",
-  },
-];
+// local mounts = [
+//   {
+//     name: "docker-socket",
+//     path: "/var/run/docker.sock",
+//   },
+// ];
 
 
 
 [
   pipeline(
     name = "build",
-    volumes = volumes,
+    // volumes = volumes,
     steps = [
       step(
         name = "build",
@@ -114,7 +114,7 @@ local mounts = [
         ],
         when = {
           ref: {
-            include: [
+            includes: [
               "master"
             ]
           }
@@ -138,7 +138,7 @@ local mounts = [
     services = [
       service_postgres,
     ],
-    volumes = volumes,
+    // volumes = volumes,
     steps = [
       step(
         name = "setup",

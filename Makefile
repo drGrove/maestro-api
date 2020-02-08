@@ -108,3 +108,7 @@ postgres:
 .PHONY: clean
 clean:
 	@rm -r $(PIP_ENV)
+
+.PHONY: .drone.yml
+.drone.yml:
+	@drone jsonnet --stream
